@@ -29,23 +29,28 @@ clear line between the links.
 #Google_link_Searcher(Page_html) #get the links to pages
 """ ^3 lines above are not needed, just allow me to test the google_Search fn
 without using the form """
-Form=Tk()
-Form.geometry("500x500")
+Form=Tk() #registers form as the fn which will be called from the TK mainloop
+Form.geometry("800x500") #make the form [x,y] in size
 
 #canvas
-canvas=Canvas(Form, width=400,height=300)
-canvas.pack()
+canvas=Canvas(Form, width=400,height=300) # canvas with dimensions [400,300]
+canvas.pack() # add the canvas to the form, Form
 
 #button to search with
 SearchBtn=Button(Form, text="Search", command=Google_Search)
+#^ when the user clicks the button, it calls the google_search function to get the search results and print them
 canvas.create_window(350,140,window=SearchBtn)
+#^add the SearchBtn to the canvas in the form
 
 #SearchBar for people to enter what they want to search
 SearchBar= Entry(Form, width=40)
 canvas.create_window(200,140,window=SearchBar)
+"""^ adds the search bar to the canvas. this is used to input the search query
+for the Google_Search function """
 
 #text to print the links to
 text=Text(Form)
 text.pack()
+#^the contents of the text are manipulated elsewhere using the text.insert(INSERT, "[insert thing here]") function
 
-Form.mainloop()
+Form.mainloop() #to draw the form to process the events on the form
