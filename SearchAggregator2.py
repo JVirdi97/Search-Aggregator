@@ -6,9 +6,6 @@ from tkinter import *  # import * <=> import everything
 from selenium import webdriver
 
 
-ff = webdriver.firefox
-
-
 def dogooglesearch():  # define the fn here or the program will break
     searchterm = SearchBar.get()
     text.delete("0.0", END)
@@ -38,16 +35,16 @@ def dogooglesearch():  # define the fn here or the program will break
 
 """)
 
+    browser = webdriver.Firefox()  # will open links in firefox browser
+    browser.get("https://www.google.com/search?q=" + searchterm)  # which link to open
+    # browser.quit()  # exit the browser
 
-"""the 2 text.insert lines insert the link into the text box, and then
-put a clear line between the links.
-"""
 
 Form = Tk()  # registers form as the fn which will be called from the TK mainloop
 Form.geometry("800x500")  # make the form [x,y] in size
 
 # canvas
-canvas = Canvas(Form, width=400,height=300)  # canvas with dimensions [400,300]
+canvas = Canvas(Form, width=400, height=300)  # canvas with dimensions [400,300]
 canvas.pack()  # add the canvas to the form, Form
 
 # button to search with
