@@ -6,15 +6,18 @@ from tkinter import *  # import * <=> import everything
 from selenium import webdriver
 
 
-def dogooglesearch(): # define the fn here or the program will break
+ff = webdriver.firefox
+
+
+def dogooglesearch():  # define the fn here or the program will break
     searchterm = SearchBar.get()
     text.delete("0.0", END)
-    if searchterm == "": # if user doesnt enter a search term
+    if searchterm == "":  # if user doesnt enter a search term
         text.insert(INSERT, """Please enter a search term
 """)
-        return # get out of the function if there's nothing to search for
+        return  # get out of the function if there's nothing to search for
         # get the search term from the search bar in the form
-    response = requests.get("https://www.google.com/search?q="+SearchTerm)
+    response = requests.get("https://www.google.com/search?q="+searchterm)
     # gets the first results page of the search
     if response.status_code == requests.codes.ok:
         """check the status of the request, if it failed, show what code
@@ -30,7 +33,7 @@ def dogooglesearch(): # define the fn here or the program will break
             link_href = str(link.get("href"))  # get link to the page
             cutoff = link_href.find("&sa=U&ved")  # get rid of useless end piece
             site_link = link_href[7:cutoff]  # get rid of useless bit at start
-            text.insert(INSERT, Site_Link)  # put the link in the text box
+            text.insert(INSERT, site_link)  # put the link in the text box
             text.insert(INSERT, """"
 
 """)
@@ -48,10 +51,10 @@ canvas = Canvas(Form, width=400,height=300)  # canvas with dimensions [400,300]
 canvas.pack()  # add the canvas to the form, Form
 
 # button to search with
-SearchBtn = Button(Form, text="Search", command=doGoogleSearch)
+SearchBtn = Button(Form, text="Search", command=dogooglesearch)
 """^ when the user clicks the button, it calls the google_search
     function to get the search results and print them """
-canvas.create_window(350,140,window=SearchBtn)  # ^add the SearchBtn to the canvas in the form
+canvas.create_window(350, 140, window=SearchBtn)  # ^add the SearchBtn to the canvas in the form
 
 # SearchBar for people to enter what they want to search
 SearchBar = Entry(Form, width=40)
